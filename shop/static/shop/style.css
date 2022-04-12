@@ -1,0 +1,14 @@
+body{
+    background-color: blue(167, 54, 54);
+}
+
+.card-text{
+    color: blue;
+    font-weight: 800;
+}
+
+.card-title{
+    font-weight: 900;
+}
+
+

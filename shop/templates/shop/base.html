@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+
+    #dropbtn{
+      font-weight: bold;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      padding: 10px;
+      border-radius: 25px;
+    }
+
+    .dropdown-content button {
+      color: black;
+      border-radius: 25px;
+      text-decoration: none;
+      display: block;
+      width: 120px;
+      margin-top: 5px;
+      margin-left: 10px;
+      text-align: center;
+
+
+    }
+
+    .dropdown-content button:hover {
+      background-color: orange;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .fav{
+
+      color: black;
+      font-weight: bold;
+    }
+    .fav:hover{
+      color: #e77f00;
+    }
+
+    #cart{
+      color: black;
+      font-weight: bold;
+    }
+    
+    #cart:hover{
+      color: #e77f00;
+    }
+    .col-md-4{
+      margin-top: 20px;
+    }
+
+    .col-md-2{
+      font-size:32px; 
+      text-align: center;
+      margin-top:40px;
+      font-weight: bold;
+    }
+
+  
+
+      .nav .container-fluid {
+          padding-left: 52px;
+          padding-right: 52px;
+      }
+  
+  
+  .nav .navbar {
+      height: 100%;
+      padding: 0;
+  }
+
+  
+
+  @media (min-width: 768px) {
+      .nav,
+      .nav .navbar {
+          background: white !important;
+      }
+      
+      .nav .navbar-brand {
+          display: none;
+      }
+      
+      .nav .navbar-dark a.nav-link {
+          color: black;
+          font-size: 14px;
+          text-transform: uppercase;
+          margin-left: 25px;
+          font-weight: bold;
+
+      }
+      
+      .nav .navbar-dark a.nav-link:hover
+{
+          color: #e77f00;
+      }
+  }
+  
+  @media (max-width: 768px) {
+      .nav {
+          padding: 5px 0;
+      }
+      
+      .nav,
+      .nav .navbar {
+          background: #000000 !important;
+      }
+      
+      .nav a.nav-link {
+          padding: 5px 0;
+      }
+      
+      .nav .dropdown-menu {
+          box-shadow: none;
+      }
+  }
+.slider{
+   width: 90px;
+   border-radius: 50%;
+   vertical-align: middle;
+   border: 1px solid black;
+   margin-top: 10px;
+   margin-right: 10px;
+   height: 90px;
+}
+
+
+  </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'shop/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static "fontawesome/css/all.min.css" %}" />
+
+</head>
+
+<body>
+
+
+      <div class="row " style="margin-top: 20px;">
+        
+        <div class="col-md-2">Shopping Center
+      </div>
+
+        <div class="col-md-6">
+          <form class="card card-sm" style="margin-bottom: 30px; margin-top: 30px; background-color:#e77f00;">
+            <div class="card-body row no gutters align-items-center">
+              <div class="col">
+                <input type="search" name="item_name" placeholder="Search for products"
+                  class="form-control form-control borderless">
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+
+          {% if user.is_authenticated %}
+
+          <div class="dropdown">
+            <i class="fas fa-user"></i><a id="dropbtn" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              My Account
+             </a>
+            <div class="dropdown-content">
+              <a class="dropdown-item" href="{% url 'register' %}">Profile</a>
+              <a class="dropdown-item"  href="{% url 'logout' %}">Log Out</a>
+
+            </div>
+          </div>
+          {% else %}
+
+            <div class="dropdown">
+              <i class="fas fa-user"></i><a id="dropbtn" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Sign In
+               </a>
+              <div class="dropdown-content">
+                <a class="dropdown-item" href="{% url 'login' %}">Sign In</a>
+                <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+
+              </div>
+            </div>
+          {% endif %}
+
+          <i class="fas fa-heart" style="margin-left: 10px;"></i><a class="fav" href="#">My Favorites</a>
+          <i class="fas fa-shopping-cart"></i><a id="cart" class="cart" data-html="true"
+          data-container="body" data-toggle="popover" data-placement="bottom">
+          Basket(0)
+          </a>
+
+        </div>
+       
+
+      </div>
+
+      <div class="nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                  {% for category in categories %}
+                      {% if not category.children.all %}
+                          <a href="product-detail.html" class="nav-item nav-link">{{ category.title }}</a>
+                      {% else %}
+                          <div class="dropdown">
+                            <a href="." class="nav-item nav-link">{{ category.title }}</a>
+                          
+
+                             <div class="dropdown-content">
+                                 {% for subcategory in category.children.all %}
+
+                                    {% if not subcategory.children.all %}
+                                           <a class="nav-item nav-link" href=".">{{ subcategory.title }}</a>
+                                    {% else %}
+                                            <a  href="." class="nav-item nav-link">{{ subcategory.title }}</a>
+                                            <ul class="dropdown-item">
+                                               {% for subobj in subcategory.children.all %}
+                                                <a href="product-detail.html" class="sub-item nav-link" style="font-size: 12px; font-weight:2px">{{ subobj.title }}</a>
+                                               {% endfor %}
+                                            </ul>
+                                    {% endif %}
+                                 {% endfor %}
+                             </div>
+                          </div>
+                       {% endif %}
+                    {% endfor %}
+               </div>
+            </nav>
+        </div>
+    </div>
+  
+
+  <marquee behavior="scroll" direction="right" >
+    <span>
+      <img src="{% static 'shop/images/huawei.png' %}" class="slider" alt="Huawei">
+      <img src="{% static 'shop/images/apple.png' %}" class="slider" alt="Apple">
+      <img src="{% static 'shop/images/samsung.png' %}" class="slider" alt="Samsung">
+      <img src="{% static 'shop/images/asus.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/nike.png' %}" class="slider" alt="Nike">
+      <img src="{% static 'shop/images/adidas.png' %}" class="slider" alt="Adidas">
+      <img src="{% static 'shop/images/puma.png' %}" class="slider" alt="Puma">
+      <img src="{% static 'shop/images/zara.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/armani.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/mango.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/h&m.png' %}" class="slider" alt="H%M">
+      <img src="{% static 'shop/images/mavi.png' %}" class="slider" alt="Mavi">
+      <img src="{% static 'shop/images/pull&bear.png' %}" class="slider" alt="Pull&bear">
+      <img src="{% static 'shop/images/penti.png' %}" class="slider" alt="Penti">
+      <img src="{% static 'shop/images/mac.png' %}" class="slider" alt="Mac">
+    </span>
+    <span>
+      <img src="{% static 'shop/images/huawei.png' %}" class="slider" alt="Huawei">
+      <img src="{% static 'shop/images/apple.png' %}" class="slider" alt="Apple">
+      <img src="{% static 'shop/images/samsung.png' %}" class="slider" alt="Samsung">
+      <img src="{% static 'shop/images/asus.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/nike.png' %}" class="slider" alt="Nike">
+      <img src="{% static 'shop/images/adidas.png' %}" class="slider" alt="Adidas">
+      <img src="{% static 'shop/images/puma.png' %}" class="slider" alt="Puma">
+      <img src="{% static 'shop/images/zara.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/armani.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/mango.png' %}" class="slider" alt="Zara">
+      <img src="{% static 'shop/images/h&m.png' %}" class="slider" alt="H%M">
+      <img src="{% static 'shop/images/mavi.png' %}" class="slider" alt="Mavi">
+      <img src="{% static 'shop/images/pull&bear.png' %}" class="slider" alt="Pull&bear">
+      <img src="{% static 'shop/images/penti.png' %}" class="slider" alt="Penti">
+      <img src="{% static 'shop/images/mac.png' %}" class="slider" alt="Mac">
+    </span>
+</marquee>
+
+    {% block body %}
+    {% endblock %}
+
+
+
+
+</body>
+
+</html>
