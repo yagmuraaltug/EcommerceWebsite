@@ -84,7 +84,7 @@ DATABASES = {
         "ENGINE": "sql_server.pyodbc",
         "NAME": "ecommerce",
         "USER": "yagmuraaltug",
-        "PASSWORD": "Komik..123",
+        "PASSWORD": "**",
         "HOST": "DESKTOP-7SH49PL",
         "PORT": "",
         "OPTIONS": {
